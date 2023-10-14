@@ -46,7 +46,7 @@ create table departament(
 
 -- 'def', 'company_constraints', 'departament_ibfk_1', 'company_constraints', 'departament', 'FOREIGN KEY', 'YES'
 -- modificar uma constraint: drop e add
-alter table departament drop  departament_ibfk_1;
+alter table departament drop departament_ibfk_1;
 alter table departament 
 		add constraint fk_dept foreign key(Mgr_ssn) references employee(Ssn)
         on update cascade;
