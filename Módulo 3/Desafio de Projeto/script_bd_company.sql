@@ -22,11 +22,11 @@ CREATE TABLE employee(
     constraint pk_employee primary key (Ssn)
 );
 
-alter table employee 
+/*alter table employee 
 	add constraint fk_employee 
 	foreign key(Super_ssn) references employee(Ssn)
     on delete set null
-    on update cascade;
+    on update cascade;*/
 
 alter table employee modify Dno int not null default 1;
 
@@ -46,26 +46,21 @@ create table departament(
 
 -- 'def', 'company_constraints', 'departament_ibfk_1', 'company_constraints', 'departament', 'FOREIGN KEY', 'YES'
 -- modificar uma constraint: drop e add
-alter table departament drop departament_ibfk_1;
-alter table departament 
-		add constraint fk_dept foreign key(Mgr_ssn) references employee(Ssn)
-        on update cascade;
+-- alter table departament drop departament_ibfk_1;
+alter table departament add constraint fk_dept foreign key(Mgr_ssn) references employee(Ssn) on update cascade;
 
 desc departament;
 
 create table dept_locations(
 	Dnumber int not null,
 	Dlocation varchar(15) not null,
-    constraint pk_dept_locations primary key (Dnumber, Dlocation),
-    constraint fk_dept_locations foreign key (Dnumber) references departament (Dnumber)
+    constraint pk_dept_locations primary key (Dnumber, Dlocation) --,
+    -- constraint fk_dept_locations foreign key (Dnumber) references departament (Dnumber)
 );
 
-alter table dept_locations drop fk_dept_locations;
+-- alter table dept_locations drop fk_dept_locations;
 
-alter table dept_locations 
-	add constraint fk_dept_locations foreign key (Dnumber) references departament(Dnumber)
-	on delete cascade
-    on update cascade;
+alter table dept_locations add constraint fk_dept_locations foreign key (Dnumber) references departament(Dnumber) on delete cascade on update cascade;
 
 create table project(
 	Pname varchar(15) not null,
@@ -87,7 +82,8 @@ create table works_on(
     constraint fk_project_works_on foreign key (Pno) references project(Pnumber)
 );
 
-drop table dependent;
+-- drop table dependent;
+
 create table dependent(
 	Essn char(9) not null,
     Dependent_name varchar(15) not null,
